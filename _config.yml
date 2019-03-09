@@ -17,7 +17,7 @@ title: Matt Bidewell
 email: matthewbidewell@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   "I'm just a simple dev, trying to make my way through the universe" Matt Bidewell Software Engineer
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://matty.dev" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: MattyDev_
 github_username:  mattbidewell
