@@ -217,13 +217,14 @@ pre {
     vertical-align: text-top;
 }
 
-.social-media-list {
-  li + li {
+.site-nav {
+  li {
     padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display:inline;
   }
 }
-
-
 
 /**
  * Tables
