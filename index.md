@@ -5,4 +5,4 @@
 layout: home
 ---
 
-### Software Engineer currently reinventing the advertisement industry at <span style="color:rgb(59, 206, 194)"> **A Million ads**</span>
+<!-- ### Software Engineer currently reinventing the advertisement industry at <span style="color:rgb(59, 206, 194)"> **A Million ads**</span> -->
