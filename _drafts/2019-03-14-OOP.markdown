@@ -1,0 +1,271 @@
+---
+layout: post-draft
+title: "Four Programming Principles of OOProgramming"
+category: tutorial
+date: 2019-03-14 10:00:00 +0100
+---
+  <h3>Introduction</h3>
+  <p>
+    This following post with briefly explain the four main principles used in
+    object orientated programming. I will also gloss over object orientated programming
+    for complete beginners. All sections will have a code example to help you understand.
+  </p>
+  <h3>Encapsulation</h3>
+  <p>
+    Encapsulation is the practice of having class fields hidden behind accessor
+    (getters) and mutator (setters) methods. To achieve this the class would
+    usually create the fields with the private keyword to stop accidental external
+    mutation from other classes.
+  </p>
+  <p>
+    The main benefit of using Encapsulation is that it provides a layer of
+    programming protection where users of that class are unable to change the
+    fields without calling the mutator method first. If we remove the mutator
+    method, we remove users ability to modify the fields.
+    A good example is if you was creating an API and a field could only be retrieved and not mutated then
+    a getter and not a setter would work fine.
+  </p>
+  <p>
+    Encapsulation provides developers with a way of protecting input and controlling
+    what input is entered into that variable. For example, if another class tried to
+    add 'null' to that field through the setter method, you could add code to the
+    method to reject it.
+    Encapsulation also allows the programmer to control the read/write permissions
+    of the class.
+  </p>
+  <div class = "code-highlight">
+    {% highlight java %}
+    /*
+      Here is an example of a class called Person.
+      Person has two variables both are private.
+
+      For both variables we provide two methods, one for retrieving the value
+      and one for setting the value.
+
+      If we only wanted to retrieve the value we would only use a 'getter'.
+      If we only wanted the ability to set the value we would only use a 'setter'.
+    */
+      public Class Person{
+
+        private int age;
+        private String name;
+
+        //****Getters****
+        public int getAge(){
+          return age;
+        }
+
+        public String getName(){
+          return name;
+        }
+
+        //****Setters****
+        public void setAge(int age){
+          this.age = age;
+        }
+
+        public void setName(String name){
+          this.name = name;
+        }
+      }
+    {% endhighlight %}
+  </div>
+  <h4>Summary</h4>
+  <p>
+    Encapsulation is the practice of hiding data from other classes through the
+    use of getter and setter methods.
+    <ul>
+      <li>Protects variables by giving the option of rule based setter methods.</li>
+      <li>Allows the control of the read/write permissions of that class.</li>
+    </ul>
+  <h3>Inheritance</h3>
+  <p>
+    Inheritance allows you to create a class that 'inherits' another class's
+    behaviours and attributes. This is commonly known as a parent-child
+    relationship.
+  </p>
+  <p>One example could be a class called 'person' is a parent class to other
+    classes such as 'employee', 'citizen', 'customer' etc. The child classes
+    here would inherit the methods and fields of the person classes.
+  </p>
+  <p>
+    If a parent class had a method called 'walk' with an implementation then
+    all the child classes would also have the same implementation for a method
+    called walk. However, it is possible to override inside the child class.
+  </p>
+  <p>
+    It's key to note that the parent class will know nothing of the child class.
+    On the other hand, the child class knows everything of the parent class.
+  </p>
+  <div class = "code-highlight">
+  {% highlight java %}
+  /*
+    Here is an example of a class called Car.
+
+    The class has three fields and one method, accelerate().
+  */
+    public Class Car{
+
+      protected int noOfDoors;
+      protected String color;
+      protected int speed;
+
+      public Car(int noOfDoors, String color){
+        this.color = color;
+        this.noOfDoors = noOfDoors;
+        speed = 0;
+      }
+
+      public void accelerate(){
+        speed += 1;
+      }
+
+      public int getSpeed(){
+          return speed;
+      }
+    }
+  {% endhighlight %}
+  </div>
+  <div class = "code-highlight">
+  {% highlight java %}
+    /*
+      Here is an example of a sub-class called Honda.
+
+      The class has inherited three fields and overrides one method, accelerate().
+    */
+      public Class Honda extends Car{
+
+        public Honda(int noOfDoors, String color){
+          super(noOfDoors, color);
+          speed = 0;
+        }
+
+        public void accelerate(){
+          speed += 5;
+        }
+      }
+  {% endhighlight %}
+  </div>
+  <p>
+    As we can see, Honda extends from the class Car. This gives the class Honda
+    all the methods and variables (not private ones) that Car has. If we initiate
+    a Car and a Honda and then call the 'accelerate' methods we can see that Honda
+    accelerates at a speed of 5, as defined. However, car accelerates at a speed
+    of 1, as defined.
+  </p>
+  <div class = "code-highlight">
+    {% highlight java %}
+      public class test {
+
+        public static void main (String args[]){
+          Honda vroom = new Honda(4, "black");
+          Car vroom2 = new Car(4, "black");
+
+          System.out.println("Honda speed: " + vroom.getSpeed());
+          System.out.println("Parent speed: " + vroom2.getSpeed());
+
+          /*Output: Honda speed: 0
+                    Parent speed: 0*/
+
+          vroom.accelerate();
+          vroom2.accelerate();
+
+          System.out.println("\nHonda speed: " + vroom.getSpeed());
+          System.out.println("Parent speed: " + vroom2.getSpeed());
+
+
+          /*Output: Honda speed: 5
+                    Parent speed: 1*/
+        }
+      }
+    {% endhighlight%}
+  </div>
+  <h4>Summary</h4>
+  <p>
+    Inheritance provides a great way to reduce code duplication. With inheritance,
+    you don't have to repeat the same method in all the classes that use it, instead,
+    have those classes inherit it from a parent class. This is perfect for situations
+    where you're mimicking a parent-child relationship.
+    For example, Card class could be the parent to the classes Debit Card, Credit Card,
+    Loyalty Card. Another way to think of it is that Inheritance provides an 'IS-A' relationship.
+  </p>
+  <h3>Polymorphism</h3>
+  <p>
+    Polymorphism is when we instantiate a parent class but create a child class.
+    Polymorphic creations are commonly used in conjunction with inherited classes.
+    The effects of Polymorphism vary from language to language, so this only a brief
+    definition.
+  </p>
+  <p>
+    An instantiated polymorphic creation would allow us to pass the object
+    through a method's parameter even if the created object was a subclass of the
+    parent.
+  </p>
+  <p>
+    For example, let's create a parent, child relationship. Animal class being
+    the parent with Dog being the child.
+  </p>
+  <p>
+    Now we create a Feeder class which will have the method feed which has the
+    parameter of Animal.
+  </p>
+  <p>
+    If we instantiate a Dog class and change the method parameter to Dog then it
+    is known as a tightly coupled designed. This might not be the desired design.
+    Instead, we use a polymorphic creation, we instantiate the Animal but create
+    a Dog.
+  </p>
+  <p>
+    This is just a brief short overview of Polymorphism.
+  </p>
+  <div class = "code-highlight">
+    {% highlight java %}
+    /*
+    This test is all in the assumption that Dog extends from Animal and Feeder
+    has a method called 'feed' which takes a Animal parameter.
+    */
+      public class test {
+
+        public static void main (String args[]){
+
+          Feeder feeder1 = new Feeder();
+          Animal dog1 = new Dog(); //Polymorhic creation
+
+          feeder1.feed(dog1); //Using polymorphic creation we can use it a param
+        }
+      }
+    {% endhighlight%}
+  </div>
+  <h3>Abstraction</h3>
+  <p>
+    OOP abstraction should not be confused with the Java keyword abstract, they
+    are different in many ways.
+  </p>
+  <p>
+    Abstraction is the idea of taking a complex behaviour and simplifying the interaction
+    for the users. A great example is a car; a normal user doesn't care how the car
+    works but instead, they care for the usability. The user (driver) only
+    needs to know how to use the car's interface, which is the steering wheel for
+    steering and the pedals to control acceleration and deceleration.
+  </p>
+  <p>
+    In a development example, its similar to how we interact with an API or
+    framework. We don't need to know how certain methods work we just need to
+    know that when we call a method we input a certain parameter and we receive a
+    specific output.
+  </p>
+  <p>
+    One key feature of using abstraction is that no matter what the 'inside' of
+    the class/method looks like the input and output should never change unless
+    key functionality of the class/method changes. That way, when you come to
+    updating your methods it will require less adjustment at the user side.
+  </p>
+  <h4>
+    Summary
+  </h4>
+  <p>
+    When designing your classes it's a good practice to make sure that the parameters
+    and return values are kept simple. That way in the future when you're updating
+    the methods it will create less of an issue for the users for the other classes
+    that use that method.
+  </p>
